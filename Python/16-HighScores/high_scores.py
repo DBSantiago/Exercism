@@ -32,4 +32,8 @@ def personal_top_three(scores):
 
     scores_copy.sort()
 
-    return scores_copy[-3:]
+    highest_three = scores_copy[-3:]
+
+    highest_three.reverse()
+
+    return highest_three
