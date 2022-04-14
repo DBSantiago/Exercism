@@ -8,10 +8,7 @@ def create_inventory(items):
     :param items: list - list of items to create an inventory from.
     :return:  dict - the inventory dictionary.
     """
-    inventory = {}
-
-    for item in items:
-        inventory[item] = items.count(item)
+    inventory = {item: items.count(item) for item in set(items)}
 
     return inventory
 
@@ -25,11 +22,8 @@ def add_items(inventory, items):
     """
     items_to_add = create_inventory(items)
 
-    for key, value in items_to_add.items():
-        if key in inventory:
-            inventory[key] += value
-        else:
-            inventory[key] = value
+    for item, quantity in items_to_add.items():
+        inventory[item] = inventory.setdefault(item, 0) + quantity
 
     return inventory
 
@@ -43,12 +37,9 @@ def decrement_items(inventory, items):
     """
     items_to_decrease = create_inventory(items)
 
-    for key, value in items_to_decrease.items():
-        if key in inventory:
-            if inventory[key] - value < 0:
-                inventory[key] = 0
-            else:
-                inventory[key] -= value
+    for item, quantity in items_to_decrease.items():
+        if item in inventory:
+            inventory[item] = max(0, inventory[item] - quantity)
 
     return inventory
 
@@ -59,10 +50,7 @@ def remove_item(inventory, item):
     :param item: str - item to remove from the inventory.
     :return:  dict - updated inventory dictionary with item removed.
     """
-    for key in inventory:
-        if key == item:
-            inventory.pop(item)
-            break
+    inventory.pop(item, None)
 
     return inventory
 
@@ -73,10 +61,7 @@ def list_inventory(inventory):
     :param inventory: dict - an inventory dictionary.
     :return: list of tuples - list of key, value pairs from the inventory dictionary.
     """
-    inventory_list = []
-
-    for key in inventory:
-        if inventory[key] > 0:
-            inventory_list.append(tuple([key, inventory[key]]))
+    inventory_list = [(item, quantity)
+                      for item, quantity in inventory.items() if quantity > 0]
 
     return inventory_list
