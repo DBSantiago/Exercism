@@ -8,9 +8,7 @@ def create_inventory(items):
     :param items: list - list of items to create an inventory from.
     :return:  dict - the inventory dictionary.
     """
-    inventory = {item: items.count(item) for item in set(items)}
-
-    return inventory
+    return add_items({}, items)
 
 
 def add_items(inventory, items):
@@ -20,10 +18,8 @@ def add_items(inventory, items):
     :param items: list - list of items to update the inventory with.
     :return:  dict - the inventory dictionary update with the new items.
     """
-    items_to_add = create_inventory(items)
-
-    for item, quantity in items_to_add.items():
-        inventory[item] = inventory.setdefault(item, 0) + quantity
+    for item in items:
+        inventory[item] = inventory.get(item, 0) + 1
 
     return inventory
 
@@ -61,7 +57,4 @@ def list_inventory(inventory):
     :param inventory: dict - an inventory dictionary.
     :return: list of tuples - list of key, value pairs from the inventory dictionary.
     """
-    inventory_list = [(item, quantity)
-                      for item, quantity in inventory.items() if quantity > 0]
-
-    return inventory_list
+    return [(item, quantity) for item, quantity in inventory.items() if quantity > 0]
