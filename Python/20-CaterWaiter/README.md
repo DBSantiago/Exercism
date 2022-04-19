@@ -1,0 +1,45 @@
+# Instructions
+
+You and your business partners operate a small catering company. You've just agreed to run an event for a local cooking club that features "club favorite" dishes. The club is inexperienced in hosting large events, and needs help with organizing, shopping, prepping and serving. You've decided to write some small Python scripts to speed the whole planning process along.
+
+## 1. Clean up Dish Ingredients
+
+The event recipes were added from various sources and their ingredients appear to have duplicate (or more) entries -- you don't want to end up purchasing excess items! Before the shopping and cooking can commence, each dish's ingredient list needs to be "cleaned".
+
+Implement the clean_ingredients(< dish_name >, < dish_ingredients >) function that takes the name of a dish and a list of ingredients. This function should return a tuple with the name of the dish as the first item, followed by the de-duped set of ingredients.
+
+## 2. Cocktails and Mocktails
+
+The event is going to include both cocktails and "mocktails" - mixed drinks without the alcohol. You need to ensure that "mocktail" drinks are truly non-alcoholic and the cocktails do indeed include alcohol.
+
+Implement the check_drinks(< drink_name >, < drink_ingredients >) function that takes the name of a drink and a list of ingredients. The function should return the name of the drink followed by "Mocktail" if the drink has no alcoholic ingredients, and drink name followed by "Cocktail" if the drink includes alcohol. For the purposes of this exercise, cocktails will only include alcohols from the ALCOHOLS constant in sets_categories_data.py:
+
+## 3. Categorize Dishes
+
+The guest list includes diners with different dietary needs, and your staff will need to separate the dishes into Vegan, Vegetarian, Paleo, Keto, and Omnivore.
+
+Implement the categorize_dish(< dish_name >, < dish_ingredients >) function that takes a dish name and a set of that dish's' ingredients. The function should return a string with the dish name: < CATEGORY > (which meal category the dish belongs to). All dishes will "fit" into one of the categories imported from sets_categories_data.py (VEGAN, VEGETARIAN, PALEO, KETO, or OMNIVORE).
+
+## 4. Label Allergens and Restricted Foods
+
+Some guests have allergies and additional dietary restrictions. These ingredients need to be tagged/annotated for each dish so that they don't cause issues.
+
+Implement the tag_special_ingredients(< dish >) function that takes a tuple with the dish name in the first position, and a list or set of ingredients for that dish in the second position. Return the dish name followed by the set of ingredients that require a special note on the dish description. Dish ingredients inside a list may or may not have duplicates. For the purposes of this exercise, all allergens or special ingredients that need to be labeled are in the SPECIAL_INGREDIENTS constant imported from sets_categories_data.py.
+
+## 5. Compile a "Master List" of Ingredients
+
+In preparation for ordering and shopping, you'll need to compile a "master list" of ingredients for everything on the menu (quantities to be filled in later).
+
+Implement the compile_ingredients(< dishes >) function that takes a list of dishes and returns a set of all ingredients in all listed dishes. Each individual dish is represented by its set of ingredients.
+
+## 6. Pull out Appetizers for Passing on Trays
+
+The hosts have given you a list of dishes they'd like prepped as "bite-sized" appetizers to be served on trays. You need to pull these from the main list of dishes being prepared as larger servings.
+
+Implement the separate_appetizers(< dishes >, < appetizers >) function that takes a list of dish names and a list of appetizer names. The function should return the list of dish names with appetizer names removed. Either the < dishes > or < appetizers > list could contain duplicates and may require de-duping.
+
+## 7. Find Ingredients Used in Only One Recipe
+
+Within in each category (Vegan, Vegetarian, Paleo, Keto, Omnivore), you're going to pull out ingredients that appear in only one dish. These "singleton" ingredients will be assigned a special shopper to ensure they're not forgotten in the rush to get everything else done.
+
+Implement the singleton_ingredients(< dishes >, < INTERSECTIONS >) function that takes a list of dishes and a < CATEGORY >_INTERSECTIONS constant for the same category. Each dish is represented by a set of its ingredients. Each < CATEGORY >_INTERSECTIONS is a set of ingredients that appear in more than one dish in the category. Using set operations, your function should return a set of "singleton" ingredients (ingredients appearing in only one dish in the category).
