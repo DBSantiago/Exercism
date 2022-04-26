@@ -25,14 +25,14 @@ class Alien:
         self.x_coordinate = x_coordinate
         self.y_coordinate = y_coordinate
         self.health = 3
-        total_aliens_created += 1
+        Alien.total_aliens_created += 1
 
     def hit(self):
         if self.health > 0:
             self.health -= 1
 
     def is_alive(self):
-        return self.health == 0
+        return self.health > 0
 
     def teleport(self, x_coordinate, y_coordinate):
         self.x_coordinate = x_coordinate
@@ -42,3 +42,9 @@ class Alien:
         pass
 
 
+def new_aliens_collection(alien_start_positions):
+    alien_list = []
+
+    for x_position, y_position in alien_start_positions:
+        alien_list.append(Alien(x_position, y_position))
+    return alien_list
